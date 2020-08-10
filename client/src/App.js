@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import TextItem from './TextItem'
 import './App.css';
 
@@ -40,28 +42,43 @@ function App() {
     setSearchInput(e.target.value)
   }
 
+  const Paragraph = ({ index, style, data }) => {
+    return (
+      <p key={index}>
+        {data[index].map((textitem, j) => {
+          if (searchInput.length > 0 && textitem.text.search(searchInput) === -1) {
+            return null;
+          }
+
+          return (
+            <TextItem key={j} value={value} data={textitem}/>
+          )
+        })}
+      </p>
+    )
+  }
+
   return (
     <div className="App">
       <h2>JT Online Book</h2>
       <div>
         <input type="text" placeholder="Search text" value={searchInput} onChange={handleChange}/>
       </div>
-     {
-       data.map((row, i) => {
-        return (<p key={`p${i}`}>
-          {row.map((textitem, j) => {
-            if (searchInput.length > 0 && textitem.text.search(searchInput) === -1) {
-              return null;
-            }
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            className="List"
+            height={800}
+            width={width}
+            itemCount={data.length}
+            itemSize={150}
+            itemData={data}
+            >
+            {Paragraph}
+          </List>
 
-            return (
-            <>
-              <TextItem key={`${i}${j}`} value={value} data={textitem}/>
-            </>)
-          })}
-        </p>)
-       })
-     }
+        )}
+      </AutoSizer>
     </div>
   );
 }
