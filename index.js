@@ -17,8 +17,10 @@ app.get("/api/dataIdList", (req, res) => {
 
   if (req.query.datasize === DATA_SIZE_HALF) {
     res.send(data.rowIdHalfList)
-  } else {
+  } else if (req.query.datasize === DATA_SIZE_FULL) {
     res.send(data.rowIdFullList)
+  } else {
+    res.send(data.rows["row" + req.query.datasize])
   }
 })
 
