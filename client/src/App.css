@@ -5,23 +5,45 @@
 .App p {
   width: 75%;
   margin: auto;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgb(0, 0, 0);
   overflow-wrap: break-word;
+  font-family: 'Lato', sans-serif;
+}
+
+.App h4 {
+  width: 100px;
+  margin: auto;
   padding: 20px 0;
-  font-size: 14px;
+}
+
+.App h2 {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 15px 15px 10px 10px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header {
-  position: fixed;
-  z-index: 1;
-  background: white;
-  margin: auto;
-  padding-bottom: 20px;
-  right: 0;
   left: 0;
+  right: 0;
+  z-index: 1;
+  margin: auto;
+  color: white;
+  position: fixed;
+  padding: 20px;
+  background: #6320EE;
 }
 
 .content {
-  position: absolute;
-  margin-top: 100px;
+  left: 0;
+  right: 0;
+  padding: 50px 0;
   text-align: left;
+  max-width: 900px;
+  position: absolute;
+  margin: 150px auto 0 auto;
 }
