@@ -21,7 +21,7 @@
 }
 
 .App h2 {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 800;
   margin: 15px 15px 10px 10px;
   font-family: 'Montserrat', sans-serif;
@@ -36,6 +36,27 @@
   position: fixed;
   padding: 20px;
   background: #6320EE;
+  transition: 1s;
+}
+
+.minimized-header {
+  z-index: 1;
+  color: white;
+  width: 100%;
+  position: fixed;
+  padding: 15px;
+  background: #6320EE;
+}
+
+.minimized-header h2 {
+  font-size: 20px;
+  margin: 0 20px 0 0;
+  display: inline-block;
+}
+
+.minimized-header .input {
+  position: relative;
+  display: inline-block;
 }
 
 .content {
@@ -45,5 +66,38 @@
   text-align: left;
   max-width: 900px;
   position: absolute;
-  margin: 150px auto 0 auto;
+  margin: 140px auto 0 auto;
+}
+
+@media (max-width: 700px) {
+  .App p {
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .App h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 5px 5px 5px 5px;
+    position: relative;
+  }
+
+  .content {
+    margin: 100px auto 0 auto;
+  }
+
+  .minimized-header h2 {
+    font-size: 18px;
+    margin: 0 10px 5px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .minimized-header h2 {
+    display: block;
+    width: 200px;
+    margin: auto;
+  }
 }

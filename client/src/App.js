@@ -6,21 +6,22 @@ import TextItem from './TextItem'
 import './App.css';
 
 // app will fetch paragraphs in groups of 10, starting with the first 10 paragraphs
-let DATA_SET = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+let DATA_SET = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 // const DATA_SIZE_HALF = "half"
 // const DATA_SIZE_FULL = "full"
-const INTERVAL_TIME = 2000
+const INTERVAL_TIME = 2000;
 
 /** Application entry point */
 function App() {
 
-  const [data, setData] = useState([])
-  const [value, setValue] = useState(0)
-  const [searchInput, setSearchInput] = useState("")
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
   const [hasMore, setHasMore] = useState(true);
+  const [minimizeHeader, setMinimizeHeader] = useState(false);
 
   // initialize Animate On Scroll Library
-  AOS.init()
+  AOS.init();
 
   /** DO NOT CHANGE THE FUNCTION BELOW */
   useEffect(() => {
@@ -41,6 +42,20 @@ function App() {
     
     fetchData()
   }, [])
+
+  // shrink header div when user scrolls down
+  useEffect(() => {
+    const onScroll = () => {
+      setTimeout(() => {
+        const scrollPosition = window.pageYOffset;
+
+        scrollPosition > 100 ? setMinimizeHeader(true) : setMinimizeHeader(false);    
+      }, 200);
+    }
+
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener("scroll", onScroll);
+    });
 
   const handleChange = e => {
     setSearchInput(e.target.value)
@@ -74,15 +89,15 @@ function App() {
         newData.push(item)
       }) 
       setData(newData)
-    }, 200)
+    }, 100)
   }
 
   return (
     <div className="App">
-      <div className="header">
+      <div className={minimizeHeader ? "minimized-header" : "header"}>
         <div data-aos="fade-down">
           <h2 data-aos="fade-in">JT Online Book</h2>
-          <div>
+          <div className="input">
             <input type="text" placeholder="Search text" value={searchInput} onChange={handleChange}/>
           </div>
         </div>
